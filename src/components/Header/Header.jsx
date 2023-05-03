@@ -70,6 +70,7 @@ const Header = () => {
                     <button className='headerBtn'>Search</button>
                     
                 </div>
+                <div>Hello</div>
             </div>
         </div>
     </div>
