@@ -10,11 +10,19 @@ import SearchItem from '../../components/searchItem/SearchItem'
 
 const List = () => {
   const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
-  const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
   console.log(location);
+  console.log('HELLO')
+  const [destination, setDestination] = useState(location?.state?.destination);
+  const [date, setDate] = useState(location?.state?.date || [
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+  const [openDate, setOpenDate] = useState(false);
+  const [options, setOptions] = useState(location?.state?.options);
+
 
   return (
     <div>
@@ -31,9 +39,9 @@ const List = () => {
             <div className="lsItem">
               <label>Check-in Date</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                date[0].startDate,
+                date[0]?.startDate,
                 "MM/dd/yyyy"
-              )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+              )} to ${format(date[0]?.endDate, "MM/dd/yyyy")}`}</span>
               {openDate && (
                 <DateRange
                   onChange={(item) => setDate([item.selection])}
@@ -63,7 +71,7 @@ const List = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    placeholder={options.adult}
+                    placeholder={options?.adult}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -72,7 +80,7 @@ const List = () => {
                     type="number"
                     min={0}
                     className="lsOptionInput"
-                    placeholder={options.children}
+                    placeholder={options?.children}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -81,24 +89,29 @@ const List = () => {
                     type="number"
                     min={1}
                     className="lsOptionInput"
-                    placeholder={options.room}
+                    placeholder={options?.room}
                   />
                 </div>
               </div>
             </div>
             <button>Search</button>
           </div>
-          <div className="listResult">
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-            <SearchItem/>
-          </div>
+
+            <div className="listResult">
+          
+         
+          
+          <SearchItem/>
+          <SearchItem/>
+          <SearchItem/>
+          <SearchItem/>
+          <SearchItem/>
+          <SearchItem/>
+          <SearchItem/>
+          <SearchItem/>
+          <SearchItem/>
+        </div>
+         
         </div>
       </div>
     </div>
